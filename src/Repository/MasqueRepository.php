@@ -24,6 +24,7 @@ class MasqueRepository extends ServiceEntityRepository
        return $this->createQueryBuilder('m')
             ->leftJoin('m.colors', 'c')
             ->addSelect('c')
+            ->orderBy('m.id', 'DESC')
             ->setMaxResults( 4 )
             ->getQuery()
             ->getResult()

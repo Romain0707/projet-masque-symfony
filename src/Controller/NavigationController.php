@@ -22,7 +22,7 @@ final class NavigationController extends AbstractController
     #[Route('/galerie', name: 'galerie')]
     public function galerie(MasqueRepository $masqueRepository): Response
     {   
-        $masque = $masqueRepository->findFour();
+        $masque = $masqueRepository->findAll();
         return $this->render('pages/galerie.html.twig', [
             'masques' => $masque,
         ]);
