@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello NavigationController!{% endblock %}
+
+{% block body %}
+
+    <div class="card">
+        <div class="card-image">
+            <img src="{{ asset('uploads/images/' ~ masque.imageName) }}" alt="Image du masque">
+        </div>
+        <div class="card-title">
+            <h2>{{ masque.name }}</h2>
+        </div>
+        <div class="card-body">
+            {% if masque.description != null %}
+                <p><strong>Description :</strong></p>
+                <p>{{ masque.description }}</p>
+            {% endif %}
+            {% if masque.price != null %}
+                <p><strong>Prix approximatif :</strong> {{ masque.price }} €</p>
+            {% endif %}
+            {% if masque.colors != null %}
+            <p><strong>Couleurs :</strong>
+                {% for color in masque.colors %}
+                    {{ color.name }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+            {% endif %}
+        </div>
+        
+        <div class="card-option">
+            {% if is_granted('ROLE_USER')%}
+                {% if app.user.id == masque.user.id %}
+                    <a href="{{path('masque_modify',{'id' : masque.id})}}">Modifier</a>
+                    <form method="POST" action="{{ path('masque_delete', {'id': masque.id}) }}">
+                        <input type="hidden" name="_method" value="delete">
+                        <input type="hidden" name="_token" value="{{csrf_token('SUP' ~ masque.id)}}">
+                        <input type="submit" id="delete" value="Supprimer">
+                    </form>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+
+    <div>
+    {% for commentarie in masque.commentaries %}
+        <div class="commentary">
+            <p><strong>{{ commentarie.user.username }} :</strong></p>
+            <p>{{ commentarie.content }}</p>
+        </div>
+    {% endfor %}
+
+    {% if is_granted('ROLE_USER')%}
+        {{ form(form) }}
+    {% endif %}
+    </div>
+
+{% endblock %}

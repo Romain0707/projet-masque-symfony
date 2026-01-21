@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello NavigationController!{% endblock %}
+
+{% block body %}
+
+            {% for masque in masques %}
+                <div class="card">
+                    <div class="card-image">
+                        <img src="{{ asset('uploads/images/' ~ masque.imageName) }}" alt="Image du masque">
+                    </div>
+                    <div class="card-title">
+                        {{ masque.name }}
+                    </div>
+                    <div class="card-body">
+                    <p>{{ masque.description }}</p>
+                    <a href="{{path('masque_article',{'id' : masque.id})}}">Voir plus</a>
+                    </div>
+                </div>
+            {% endfor %}
+
+{% endblock %}

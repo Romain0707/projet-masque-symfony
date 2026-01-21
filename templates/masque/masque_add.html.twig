@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ isModification ? 'Modifier un masque' :  'Ajouter un masque' }}{% endblock %}
+
+{% block body %}
+
+	<h1> {{ isModification ? 'Modifier le masque' :  'Ajouter un masque' }}</h1>
+
+	{{form_start(form)}}
+	    {{form_widget(form)}}
+	    <button>{{ isModification ? 'Modifier' :  'Ajouter' }}</button>
+	{{form_end(form)}}
+
+{% endblock %}
