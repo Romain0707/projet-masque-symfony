@@ -1,0 +1,38 @@
+@use "../abstracts/variables" as variable;
+
+body {
+    position: relative;
+    font-family: variable.$font-family-body;
+    background: #2b2b2b;
+    background: radial-gradient(circle,rgba(43, 43, 43, 1) 0%, rgba(0, 0, 0, 1) 100%);
+    
+    &::after {
+        content: '';
+        background-image: url(../../images/rideaux-rouge-gpt.png);
+        background-position: top;
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 50%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 1;
+        transform: rotateY(180deg);
+        pointer-events: none;
+    }
+    &::before {
+        content: '';
+        background-image: url(../../images/rideaux-rouge-gpt.png);
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 50%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        pointer-events: none;
+    }
+}

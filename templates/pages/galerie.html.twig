@@ -3,20 +3,28 @@
 {% block title %}Hello NavigationController!{% endblock %}
 
 {% block body %}
+    <section id="galerie">
+        <div class="container">
+            <h1>Les derniers masques publié</h1>
 
+            <div class="card-container">
             {% for masque in masques %}
                 <div class="card">
-                    <div class="card-image">
-                        <img src="{{ asset('uploads/images/' ~ masque.imageName) }}" alt="Image du masque">
-                    </div>
-                    <div class="card-title">
-                        {{ masque.name }}
-                    </div>
-                    <div class="card-body">
-                    <p>{{ masque.description }}</p>
-                    <a href="{{path('masque_article',{'id' : masque.id})}}">Voir plus</a>
+                    <div class="card-content">
+                        <div class="card-image">
+                            <img src="{{ asset('uploads/images/' ~ masque.imageName) }}" alt="Image du masque">
+                        </div>
+                        <div class="card-title">
+                            {{ masque.name }}
+                        </div>
+                        <div class="card-body">
+                        <p>{{ masque.description }}</p>
+                        <a href="{{path('masque_article',{'id' : masque.id})}}">Voir plus</a>
+                        </div>
                     </div>
                 </div>
             {% endfor %}
-
+            </div>
+        </div>
+    </section>
 {% endblock %}

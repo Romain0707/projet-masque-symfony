@@ -6,9 +6,12 @@ use App\Repository\MasqueRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
+#[UniqueEntity(fields: ['name'], message: 'Un masque avec ce nom existe déjà.')]
 #[Vich\Uploadable]
 #[ORM\Entity(repositoryClass: MasqueRepository::class)]
 class Masque
@@ -19,6 +22,8 @@ class Masque
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min: 5)]
+    #[Assert\NotBlank()]
     private ?string $name = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -37,12 +42,15 @@ class Masque
     private Collection $commentaries;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\NotBlank()]
+    #[Assert\Positive()]
     private ?int $price = null;
 
     #[ORM\ManyToOne(inversedBy: 'masques')]
     private ?User $user = null;
 
     #[Vich\UploadableField(mapping: 'images', fileNameProperty: 'imageName')]
+    #[Assert\NotBlank()]
     private ?File $imageFile = null;
 
     #[ORM\Column(nullable: true)]
