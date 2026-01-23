@@ -6,6 +6,7 @@ use App\Entity\Colors;
 use App\Entity\Masque;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,6 +16,9 @@ class ColorsType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add(('submit'), SubmitType::class, [
+                'label' => 'Ajouter une couleur',
+            ])
         ;
     }
 

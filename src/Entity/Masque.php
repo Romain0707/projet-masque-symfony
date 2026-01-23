@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\MasqueRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
@@ -26,8 +27,7 @@ class Masque
     #[Assert\NotBlank()]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $description = null;
+
 
     /**
      * @var Collection<int, Colors>
@@ -59,6 +59,9 @@ class Masque
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $description = null;
+
     public function __construct()
     {
         $this->colors = new ArrayCollection();
@@ -82,17 +85,6 @@ class Masque
         return $this;
     }
 
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): static
-    {
-        $this->description = $description;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Colors>
@@ -194,6 +186,18 @@ class Masque
     public function setImageName(?string $imageName): void
     {
         $this->imageName = $imageName;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): static
+    {
+        $this->description = $description;
+
+        return $this;
     }
 
 }

@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Colors;
 use App\Entity\Masque;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,7 +19,9 @@ class MasqueType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('description')
+            ->add('description', TextareaType::class, [
+                'required' => false,
+            ])
             ->add('price')
             ->add('colors', EntityType::class, [
                 'class' => Colors::class,

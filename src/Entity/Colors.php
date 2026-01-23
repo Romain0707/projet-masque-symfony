@@ -5,8 +5,10 @@ namespace App\Entity;
 use App\Repository\ColorsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 
+#[UniqueEntity(fields: ['name'], message: 'Cette couleur existe déjà.')]
 #[ORM\Entity(repositoryClass: ColorsRepository::class)]
 class Colors
 {

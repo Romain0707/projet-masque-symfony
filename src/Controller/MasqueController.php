@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Colors;
 use App\Entity\Commentary;
 use App\Entity\Masque;
+use App\Form\ColorsType;
 use App\Form\CommentaryType;
 use App\Form\MasqueType;
 use App\Repository\MasqueRepository;
@@ -19,15 +20,22 @@ final class MasqueController extends AbstractController
 {
     #[Route('/masque/add', name: 'masque_add')]
     #[Route('/masque/modify/{id}', name: 'masque_modify')]
-     public function index(Security $security, ?Masque $masque, Request $request, EntityManagerInterface $entityManager): Response
+     public function index(Security $security, ?Masque $masque, ?Colors $colors , Request $request, EntityManagerInterface $entityManager): Response
     {
 
         if(!$masque){
             $masque = new Masque;
         }
 
+        if(!$colors){
+            $colors = new Colors;
+        }
+
         $form = $this->createForm(MasqueType::class,$masque);
         $form->handleRequest($request);
+
+        $formcolors = $this->createForm(ColorsType::class,$colors);
+        $formcolors->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
             
@@ -45,8 +53,23 @@ final class MasqueController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
+        if($formcolors->isSubmitted() && $formcolors->isValid()) {
+
+            $entityManager->persist($colors);
+
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Couleur ajouté avec succès');
+            
+            if($masque->getId() !== null) {
+                return $this->redirectToRoute('masque_modify', ['id' => $masque->getId()]);
+            }
+            return $this->redirectToRoute('masque_add');
+        }
+
         return $this->render('masque/masque_add.html.twig', [
             'form' => $form->createView(), 
+            'formcolors' => $formcolors->createView(),
             'isModification' => $masque->getId() !== null 
         ]);
     }
