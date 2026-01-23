@@ -1,0 +1,13 @@
+@media screen and (max-width: 768px) {
+    header {
+        .nav-desktop {
+            display: none !important;
+        }
+        .nav-mobile {
+            display: none;
+        }
+        .burger {
+            display: flex !important;
+        }
+    }
+}
