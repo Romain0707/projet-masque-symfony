@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {{ encore_entry_link_tags('app') }}
-        {{ encore_entry_script_tags('app') }}
+        
 
     </head>
     <body>
@@ -60,5 +60,6 @@
         <footer>
             <p>Copyrighted Masqueronie 2025</p>
         </footer>
+        {{ encore_entry_script_tags('app') }}
     </body>
 </html>

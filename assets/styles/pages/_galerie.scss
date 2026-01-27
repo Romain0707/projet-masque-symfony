@@ -6,6 +6,7 @@
     padding-top: 18rem;
     padding-bottom: 5rem;
     .container {
+        position: relative;
         @include mixin.container;
         max-width: 800px;
     }
@@ -17,6 +18,28 @@
         margin-bottom: 1rem;
         color: white;
         margin-bottom: 2rem;
+    }
+
+    .filters-button {
+        position: absolute;
+        right: 0px;
+        top: -50px;
+
+        .filter-button {
+            background-color: #D41012;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem 1rem 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: darken(#D41012, 10%);
+            }
+        }
     }
 
     .card-container {

@@ -1,0 +1,16 @@
+{% for masque in masques %}
+    <div class="card">
+        <div class="card-content">
+            <div class="card-image">
+                <img src="{{ asset('uploads/images/' ~ masque.imageName) }}" alt="Image du masque">
+            </div>
+            <div class="card-title">
+                {{ masque.name }}
+            </div>
+            <div class="card-body">
+            <p class="clamp-2">{{ masque.description }}</p>
+            <a href="{{path('masque_article',{'id' : masque.id})}}">Voir plus</a>
+            </div>
+        </div>
+    </div>
+{% endfor %}

@@ -14,3 +14,25 @@ const navMobile = document.querySelector('.nav-mobile');
 burger.addEventListener('click', () => {
     navMobile.style.display = navMobile.style.display === 'flex' ? 'none' : 'flex';
 });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const filterBtn = document.querySelectorAll('.filter-button');
+    const resultContainer = document.querySelector('.card-container');
+
+    filterBtn.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filterValue = btn.getAttribute('data-filter');
+
+            fetch(`galerie/filters?filter=${filterValue}`, {
+                method: 'GET',
+                headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            })
+            .then(response => response.json())
+            .then(data => {
+                resultContainer.innerHTML = data.html;
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });
+});

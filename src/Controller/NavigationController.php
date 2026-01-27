@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Form\ContactType;
 use App\Repository\MasqueRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
@@ -58,6 +59,24 @@ final class NavigationController extends AbstractController
 
         return $this->render('pages/contact.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/galerie/filters', name: 'galeriefiltered', methods: ['GET'])]
+    public function filter(MasqueRepository $masqueRepository, Request $request): JsonResponse
+    {   
+        $filter = $request->get('filter', 'all');
+
+        $masque = match($filter) {
+            'asc' => $masqueRepository->findBy([], ['id' => 'ASC']),
+            'desc' => $masqueRepository->findBy([], ['id' => 'DESC']),
+            default => $masqueRepository->findAll(),
+        };
+
+        return $this->json([
+            'html' => $this->renderView('partial/article.html.twig', [
+                'masques' => $masque
+                ]),
         ]);
     }
 }
