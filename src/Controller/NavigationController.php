@@ -17,7 +17,7 @@ final class NavigationController extends AbstractController
     public function index(MasqueRepository $masqueRepository): Response
     {
 
-        $masque = $masqueRepository->findFour();
+        $masque = $masqueRepository->findBy([], ['id' => 'DESC'], 4);
         return $this->render('pages/index.html.twig', [
             'masques' => $masque,
         ]);

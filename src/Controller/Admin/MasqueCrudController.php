@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Masque;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -23,7 +24,7 @@ class MasqueCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('name'),
             TextEditorField::new('description'),
-            TextField::new('price'),
+            NumberField::new('price'),
             AssociationField::new('user','Créer par',)->setFormTypeOptions([
                 'by_reference' => true,
                 'multiple' => false,

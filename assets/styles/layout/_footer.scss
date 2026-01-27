@@ -1,0 +1,22 @@
+@use "../abstracts/variables" as variable;
+
+footer {
+    text-align: center;
+    height: 10vh;
+    padding: 20px;
+    margin-top: 40px;
+    background-image: url(../../images/footer.png);
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+        color: white;
+        font-size: larger;
+        font-family: variable.$font-family-title;
+        text-shadow: black 1px 1px 4px;
+    }
+}

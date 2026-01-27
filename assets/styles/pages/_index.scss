@@ -4,8 +4,10 @@
 
 #accueil {
     padding-top: 18rem;
+    padding-bottom: 5rem;
     .container {
         @include mixin.container;
+        max-width: 800px;
     }
 
     h1 {

@@ -29,11 +29,14 @@ class DashboardController extends AbstractDashboardController
         // return $this->redirect($adminUrlGenerator->setController(OneOfYourCrudController::class)->generateUrl());
 
         // Option 2. You can make your dashboard redirect to different pages depending on the user
+        if(!$this->getUser()){
+            return $this->redirectToRoute('login');
         
-        if ($this->getUser()->getRoles()[0] !== 'ROLE_ADMIN') {
+            if ($this->getUser()->getRoles()[0] !== 'ROLE_ADMIN') {
 
-            $this->addFlash('error', 'Accès refusé : vous n\'êtes pas administrateur.');
-            return $this->redirectToRoute('home');
+                $this->addFlash('error', 'Accès refusé : vous n\'êtes pas administrateur.');
+                return $this->redirectToRoute('home');
+            }
         }
 
         // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.

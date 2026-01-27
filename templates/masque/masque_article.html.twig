@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello NavigationController!{% endblock %}
+{% block title %}Masque Article{% endblock %}
 
 {% block body %}
     <section id="articlepage">
@@ -15,15 +15,15 @@
                             <h2>{{ masque.name }}</h2>
                         </div>
                         <div class="card-body">
-                            {% if masque.description != null %}
+                            {% if masque.description|length > 0 %}
                                 <p class="type">Description :</p>
                                 <p>{{ masque.description }}</p>
                             {% endif %}
-                            {% if masque.price != null %}
+                            {% if masque.price|length > 0 %}
                                 <p class="type">Prix approximatif : </p>
                                 <p>{{ masque.price }} €</p>
                             {% endif %}
-                            {% if masque.colors != null %}
+                            {% if masque.colors|length > 0 %}
                             <p class="type">Couleurs :</p>
                             <p>
                                 {% for color in masque.colors %}
@@ -32,7 +32,7 @@
                             </p>
                             {% endif %}
                         </div>
-                        
+
                         <div class="card-option">
                             {% if is_granted('ROLE_USER')%}
                                 {% if app.user.id == masque.user.id %}
@@ -45,22 +45,40 @@
                                 {% endif %}
                             {% endif %}
                         </div>
-                    </div>
-                    <div class="card-commentaries">
-                        <div>
-                            <h3>Commentaires :</h3>
-                            {% for commentarie in masque.commentaries %}
-                                <div class="commentary">
-                                    <p><strong>{{ commentarie.user.username }} :</strong></p>
-                                    <p class="commentary-end">{{ commentarie.content }}</p>
-                                </div>
-                            {% endfor %}
+                        
+                        <div class="card-note">
+                            <div>
+                                <p>Note global : {{ masqueNote }}</p>
 
-                            {% if is_granted('ROLE_USER')%}
-                                {{ form(form) }}
-                            {% endif %}
+                                {% if is_granted('ROLE_USER')%}
+                                    {{ form(formNote) }}
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
+                    
+                        <div class="card-commentaries">
+                            <div>
+                                
+                                <h3>Commentaires :</h3>
+
+                                {% if masque.commentaries|length == 0 %}
+                                <p>Aucun Commentaire</p>
+                                {% endif %}
+
+                                {% for commentarie in masque.commentaries %}
+                                    <div class="commentary">
+                                        <p><strong>{{ commentarie.user.username }} :</strong></p>
+                                        <p class="commentary-end">{{ commentarie.content }}</p>
+                                    </div>
+                                {% endfor %}
+
+                                {% if is_granted('ROLE_USER')%}
+                                    {{ form(form) }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    
                 </div>
             </div>
         </div>
