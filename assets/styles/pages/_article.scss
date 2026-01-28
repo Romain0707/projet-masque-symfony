@@ -150,8 +150,13 @@
 
                 h3 {
                     font-family: variable.$font-family-title;
-                    font-size: 1.25rem;
+                    font-size: 1.5rem;
                     margin-bottom: 0.5rem;
+                }
+
+                .no-commentary {
+                    font-size: 1.25rem;
+                    padding-bottom: 1rem;
                 }
 
                 .commentary {

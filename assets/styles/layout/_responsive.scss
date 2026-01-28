@@ -11,9 +11,27 @@
         }
     }
 
-    .filters-button {
-        position: absolute;
-        right: 0px;
-        top: -100px!important;
+    #articlepage {
+        .card-container {
+            .card-content {
+                grid-template-columns: 1fr !important;
+                grid-template-rows: auto auto auto auto !important ;
+            }
+
+            .card-note {
+                margin-bottom: 0!important;
+            }
+
+            .card-commentaries {
+                padding-top: 0 !important;
+                .no-commentary {
+                    background-color: white;
+                }
+            }
+        }
+    }
+
+    #masque_colors {
+        grid-template-columns: repeat(2, 50px 1fr) !important;
     }
 }

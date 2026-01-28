@@ -97,7 +97,7 @@ final class MasqueController extends AbstractController
         }
 
         if(!$note){
-            $note = new Note();
+            $note = new Note;
         }
 
         $masqueNote = $noteRepository->findAverageNoteByMasque($masque);

@@ -13,7 +13,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[UniqueEntity(fields: ['name'], message: 'Un masque avec ce nom existe déjà.')]
-#[Vich\Uploadable]
+#[Vich\Uploadable()]
 #[ORM\Entity(repositoryClass: MasqueRepository::class)]
 class Masque
 {
@@ -26,8 +26,6 @@ class Masque
     #[Assert\Length(min: 5)]
     #[Assert\NotBlank()]
     private ?string $name = null;
-
-
 
     /**
      * @var Collection<int, Colors>
@@ -49,8 +47,8 @@ class Masque
     #[ORM\ManyToOne(inversedBy: 'masques')]
     private ?User $user = null;
 
+    #[Assert\Image()]
     #[Vich\UploadableField(mapping: 'images', fileNameProperty: 'imageName')]
-    #[Assert\NotBlank()]
     private ?File $imageFile = null;
 
     #[ORM\Column(nullable: true)]
@@ -180,7 +178,7 @@ class Masque
     {
         $this->imageFile = $imageFile;
 
-        if($imageFile) {
+        if(null !== $imageFile) {
             $this->updatedAt = new \DateTimeImmutable();
         }
     }

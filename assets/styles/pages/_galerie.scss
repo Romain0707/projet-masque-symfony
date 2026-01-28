@@ -21,9 +21,10 @@
     }
 
     .filters-button {
-        position: absolute;
-        right: 0px;
-        top: -50px;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        gap: 1rem;
 
         .filter-button {
             background-color: #D41012;
