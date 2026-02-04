@@ -2,8 +2,8 @@
 @use '../abstracts/variables' as variable;
 
 #loginpage {
-    padding-top: 18rem;
-    padding-bottom: 5rem;
+    padding-top: 30vh;
+    padding-bottom: 23rem;
     .container {
         @include mixin.container;
         max-width: 750px;

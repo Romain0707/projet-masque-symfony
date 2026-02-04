@@ -2,8 +2,8 @@
 @use '../abstracts/variables' as variable;
 
 #inscriptionpage {
-    padding-top: 18rem;
-    padding-bottom: 5rem;
+    padding-top: 30vh;
+    padding-bottom: 20rem;
     .container {
         @include mixin.container;
         max-width: 750px;
